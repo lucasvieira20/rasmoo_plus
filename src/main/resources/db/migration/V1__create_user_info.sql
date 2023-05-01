@@ -1,20 +1,20 @@
 CREATE TABLE if not exists `subscriptions_type`(
-   `subscriptions_type_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `name` CHAR(255) NOT NULL,
+                                                   `subscriptions_type_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                   `name` CHAR(255) NOT NULL,
     `access_months` INT ,
     `price` DECIMAL(10,2) NOT NULL,
     `product_key` CHAR(255)
-);
+    );
 
 CREATE TABLE if not exists `user_type`(
-    `user_type_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` CHAR(255) NOT NULL,
+                                          `user_type_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                          `name` CHAR(255) NOT NULL,
     `description` CHAR(255) NOT NULL
-);
+    );
 
 CREATE TABLE if not exists `users`(
-    `users_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` CHAR(255) NOT NULL,
+                                      `users_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                      `name` CHAR(255) NOT NULL,
     `email` CHAR(255) NOT NULL,
     `phone` CHAR(255) NOT NULL,
     `cpf` CHAR(255) NOT NULL,
@@ -22,19 +22,19 @@ CREATE TABLE if not exists `users`(
     `dt_expiration` DATE NOT NULL,
     `user_type_id` INT,
     `subscriptions_type_id` INT
-);
+    );
 
 CREATE TABLE if not exists `user_payment_info`(
-    `user_payment_info_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `card_number` CHAR(255) NOT NULL,
+                                                  `user_payment_info_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                  `card_number` CHAR(255) NOT NULL,
     `card_expiration_month` INT NOT NULL,
     `card_expiration_year` INT NOT NULL,
     `card_security_code` CHAR(255) NOT NULL,
     `price` DECIMAL(10,2) NOT NULL,
-    `instalments` INT NOT NULL,
+    `installments` INT NOT NULL,
     `dt_payment` DATE NOT NULL,
     `user_id` INT
-);
+    );
 
 ALTER TABLE
     `users` ADD UNIQUE `users_email_unique`(`email`);

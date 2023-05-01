@@ -1,6 +1,3 @@
-
-
-
 package com.client.ws.rasmooplus.model;
 
 import lombok.AllArgsConstructor;
@@ -21,30 +18,31 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserCredentials implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_credentials_id")
     private Long id;
 
+    @Column
     private String username;
 
+    @Column
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_type_id")
-    private UserType userType;
+    private UserType userTypeModel;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<UserType> userTypes = new ArrayList<>();
-        userTypes.add(userType);
-        return userTypes;
+        var userTypeModelList = new ArrayList<UserType>();
+        userTypeModelList.add(userTypeModel);
+        return userTypeModelList;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     @Override

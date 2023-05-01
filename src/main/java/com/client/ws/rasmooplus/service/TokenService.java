@@ -1,9 +1,11 @@
 package com.client.ws.rasmooplus.service;
 
 
-public interface TokenService {
-//    String getToken(Long auth);
+import org.springframework.security.core.Authentication;
 
-    String getToken(Long userId);
+public interface TokenService {
+    String getToken(Authentication auth);
+    Boolean isValid(String token);
+    Long getUserId(String token);
 
 }
