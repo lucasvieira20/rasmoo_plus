@@ -25,7 +25,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         UserCredentials userCredentials = userCredentialsOpt.get();
-
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (encoder.matches(pass, userCredentials.getPassword())) {
