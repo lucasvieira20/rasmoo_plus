@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -33,15 +34,21 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/subscription-type")
-                .permitAll()
-                .requestMatchers(HttpMethod.GET, "/subscription-type/*").permitAll().anyRequest().authenticated()
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .requestMatchers(HttpMethod.POST, "/payment/process").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+                .anyRequest().authenticated()
                 .and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationFilter(tokenService, userDetailsRepository), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return webSecurityCustomizer-> webSecurityCustomizer.ignoring()
+                .requestMatchers(HttpMethod.GET, "/subscription-type")
+                .requestMatchers(HttpMethod.GET, "/subscription-type/*")
+                .requestMatchers(HttpMethod.POST, "/subscription-type*")
+                .requestMatchers(HttpMethod.POST, "/users")
+                .requestMatchers(HttpMethod.POST, "/payment/process")
+                .requestMatchers(HttpMethod.POST, "/auth");
     }
 
 }

@@ -49,12 +49,12 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String getBearerToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
 
-        if (Objects.isNull(token) ||!token.startsWith("Bearer")) {
+        String token = request.getHeader("Authorization");
+        if (Objects.isNull(token) || !token.startsWith("Bearer")) {
             return null;
         }
 
-        return token;
+        return token.substring(7, token.length());
     }
 }

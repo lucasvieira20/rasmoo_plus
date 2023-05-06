@@ -1,12 +1,11 @@
 package com.client.ws.rasmooplus.service.implementations;
 
-import com.client.ws.rasmooplus.model.UserCredentials;
 import com.client.ws.rasmooplus.service.TokenService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,14 +21,13 @@ public class TokenServiceImplementation implements TokenService {
 
 
     @Override
-    public String getToken(Authentication auth) {
-        UserCredentials user = (UserCredentials) auth.getPrincipal();
+    public String getToken(Long userId) {
+
         Date today = new Date();
         Date expirationDate = new Date(today.getTime() + Long.parseLong(expiration));
-
         return Jwts.builder()
                 .setIssuer("API Rasmoo Plus")
-                .setSubject(user.getId().toString())
+                .setSubject(userId.toString())
                 .setIssuedAt(today)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, secret)
@@ -49,15 +47,11 @@ public class TokenServiceImplementation implements TokenService {
 
     @Override
     public Long getUserId(String token) {
-        try {
-            Jws<String> claims = getClaimsJws(token);
-            return Long.parseLong(claims.getBody());
-        } catch (Exception e) {
-            throw e;
-        }
+        Jws<Claims> claims = getClaimsJws(token);
+        return Long.parseLong(claims.getBody().getSubject());
     }
 
-    private Jws<String> getClaimsJws(String token) {
-        return Jwts.parser().setSigningKey(secret).parsePlaintextJws(token);
+    private Jws<Claims> getClaimsJws(String token) {
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
     }
 }
