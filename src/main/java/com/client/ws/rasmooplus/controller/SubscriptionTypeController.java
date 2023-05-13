@@ -18,7 +18,6 @@ public class SubscriptionTypeController {
 
     @Autowired
     private SubscriptionTypeService subscriptionTypeService;
-
     @GetMapping
     public ResponseEntity<List<SubscriptionType>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findAll());

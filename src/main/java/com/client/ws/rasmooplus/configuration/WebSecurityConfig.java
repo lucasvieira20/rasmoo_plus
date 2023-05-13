@@ -47,6 +47,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/subscription-type/*")
                 .requestMatchers(HttpMethod.POST, "/subscription-type*")
                 .requestMatchers(HttpMethod.POST, "/users")
+                .requestMatchers(HttpMethod.GET, "/user/*")
                 .requestMatchers(HttpMethod.POST, "/payment/process")
                 .requestMatchers(HttpMethod.POST, "/auth");
     }

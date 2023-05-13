@@ -5,6 +5,5 @@ CREATE TABLE if not exists `user_credentials`(
     `user_type_id` INT
 );
 
-
 ALTER TABLE
     `user_credentials` ADD CONSTRAINT `fk_2_user_type_id` FOREIGN KEY(`user_type_id`) REFERENCES `user_type`(`user_type_id`);
