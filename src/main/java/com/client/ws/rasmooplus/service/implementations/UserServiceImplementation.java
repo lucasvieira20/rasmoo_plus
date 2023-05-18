@@ -4,10 +4,11 @@ import com.client.ws.rasmooplus.dto.UserDto;
 import com.client.ws.rasmooplus.exception.BadRequestException;
 import com.client.ws.rasmooplus.exception.NotFoundException;
 import com.client.ws.rasmooplus.mapper.UserMapper;
-import com.client.ws.rasmooplus.model.User;
-import com.client.ws.rasmooplus.model.UserType;
-import com.client.ws.rasmooplus.repository.UserRepository;
-import com.client.ws.rasmooplus.repository.UserTypeRepository;
+import com.client.ws.rasmooplus.model.jpa.User;
+import com.client.ws.rasmooplus.model.jpa.UserType;
+import com.client.ws.rasmooplus.repository.jpa.UserRepository;
+import com.client.ws.rasmooplus.repository.jpa.UserTypeRepository;
+import com.client.ws.rasmooplus.repository.redis.UserRecoveryCodeRepository;
 import com.client.ws.rasmooplus.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,16 @@ public class UserServiceImplementation implements UserService {
 
     private final UserTypeRepository userTypeRepository;
 
-    UserServiceImplementation(UserRepository userRepository, UserTypeRepository userTypeRepository) {
+    private final UserRecoveryCodeRepository userRecoveryCodeRepository;
+
+    UserServiceImplementation(
+        UserRepository userRepository,
+        UserTypeRepository userTypeRepository,
+        UserRecoveryCodeRepository userRecoveryCodeRepository
+    ) {
         this.userRepository = userRepository;
         this.userTypeRepository = userTypeRepository;
+        this.userRecoveryCodeRepository = userRecoveryCodeRepository;
     }
 
     @Override
@@ -49,4 +57,5 @@ public class UserServiceImplementation implements UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
 }

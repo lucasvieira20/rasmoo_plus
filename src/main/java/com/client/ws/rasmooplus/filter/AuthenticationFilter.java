@@ -1,8 +1,8 @@
 package com.client.ws.rasmooplus.filter;
 
 import com.client.ws.rasmooplus.exception.NotFoundException;
-import com.client.ws.rasmooplus.model.UserCredentials;
-import com.client.ws.rasmooplus.repository.UserDetailsRepository;
+import com.client.ws.rasmooplus.model.jpa.UserCredentials;
+import com.client.ws.rasmooplus.repository.jpa.UserDetailsRepository;
 import com.client.ws.rasmooplus.service.implementations.TokenServiceImplementation;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
