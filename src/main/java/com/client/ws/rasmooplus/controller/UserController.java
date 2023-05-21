@@ -33,9 +33,4 @@ public class UserController implements Serializable {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
-    @PostMapping("/send-recovery-code")
-    public ResponseEntity<?> sendRecoveryCode(@RequestBody Object email) {
-        return ResponseEntity.status(HttpStatus.OK).body(userDetailsService.sendRecoveryCode(null));
-    }
-
 }

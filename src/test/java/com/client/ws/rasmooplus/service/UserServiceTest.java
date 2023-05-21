@@ -14,7 +14,7 @@ public class UserServiceTest {
     @Test
     void contextLoads() {
 
-        userDetailsService.sendRecoveryCode("email@teste.com");
+        userDetailsService.sendRecoveryCode("830d1d8fe1@fireboxmail.lol");
 
     }
 
