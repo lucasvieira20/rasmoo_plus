@@ -1,5 +1,6 @@
 package com.client.ws.rasmooplus.service.implementations;
 
+import com.client.ws.rasmooplus.dto.UserDetailsDto;
 import com.client.ws.rasmooplus.exception.BadRequestException;
 import com.client.ws.rasmooplus.exception.NotFoundException;
 import com.client.ws.rasmooplus.integration.MailIntegration;
@@ -98,5 +99,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         return false;
+    }
+
+    @Override
+    public void updatePasswordByRecoveryCode(UserDetailsDto userDetailsDto) {
+        if (recoveryCodeIsValid(userDetailsDto.getRecoveryCode(), userDetailsDto.getEmail())) {
+
+            var userDetails = userDetailsRepository.findByUsername(userDetailsDto.getEmail());
+            UserCredentials userCredentials = userDetails.get();
+            userCredentials.setPassword(new BCryptPasswordEncoder().encode(userDetailsDto.getPassword()));
+
+            userDetailsRepository.save(userCredentials);
+
+        }
     }
 }
