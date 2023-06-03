@@ -49,8 +49,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/user/*")
                 .requestMatchers(HttpMethod.POST, "/payment/process")
                 .requestMatchers(HttpMethod.POST, "/auth")
-                .requestMatchers(HttpMethod.POST, "/auth/recovery-code/*")
-                .requestMatchers(HttpMethod.GET, "/auth/recovery-code/*");
+                .requestMatchers( "/auth/recovery-code/*");
     }
 
 }

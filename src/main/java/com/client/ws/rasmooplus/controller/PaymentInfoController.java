@@ -21,5 +21,4 @@ public class PaymentInfoController {
     public ResponseEntity<Boolean> process(@RequestBody PaymentProcessDto dto){
         return ResponseEntity.status(HttpStatus.OK).body(paymentInfoService.process(dto));
     }
-
 }

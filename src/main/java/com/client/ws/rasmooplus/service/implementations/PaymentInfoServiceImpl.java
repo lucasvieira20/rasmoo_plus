@@ -19,8 +19,9 @@ import com.client.ws.rasmooplus.model.jpa.UserCredentials;
 import com.client.ws.rasmooplus.model.jpa.UserPaymentInfo;
 import com.client.ws.rasmooplus.repository.jpa.*;
 import com.client.ws.rasmooplus.service.PaymentInfoService;
+import com.client.ws.rasmooplus.utils.PasswordUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -85,7 +86,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
                 throw new NotFoundException("UserType não encontrado");
             }
 
-            UserCredentials userCredentials = new UserCredentials(null, user.getEmail(), new BCryptPasswordEncoder().encode(defaultPass), userTypeOpt.get());
+            UserCredentials userCredentials = new UserCredentials(null, user.getEmail(), PasswordUtils.encode(defaultPass), userTypeOpt.get());
 
             userDetailsRepository.save(userCredentials);
 

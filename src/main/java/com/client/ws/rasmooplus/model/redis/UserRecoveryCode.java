@@ -1,5 +1,6 @@
 package com.client.ws.rasmooplus.model.redis;
 
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @RedisHash("recoveryCode")
@@ -26,7 +26,6 @@ public class UserRecoveryCode {
     private String email;
 
     private String code;
-
     private LocalDateTime creationDate = LocalDateTime.now();
 
 }
