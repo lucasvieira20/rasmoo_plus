@@ -23,11 +23,6 @@ public class UserTypeServiceTest {
     @InjectMocks
     private UserTypeServiceImplementation userTypeService;
 
-
-    /*
-    * Given_methodo_when_cenario_then_retorno_esperado
-    * */
-
     @Test
     void given_findAll_when_thereAreDataInDB_then_returnAllData() {
 

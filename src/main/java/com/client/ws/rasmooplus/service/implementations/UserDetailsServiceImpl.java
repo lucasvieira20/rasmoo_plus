@@ -21,7 +21,7 @@ import java.util.Random;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Value("${webservices.rasplus.redis.recoreycode.timeout}")
-    private String revoceryCodeTimeout;
+    private String recoveryCodeTimeout;
     @Autowired
     private UserDetailsRepository userDetailsRepository;
 
@@ -88,7 +88,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         UserRecoveryCode userRecoveryCode = userRecoveryCodeOpt.get();
 
-        LocalDateTime timeout = userRecoveryCode.getCreationDate().plusMinutes(Long.parseLong(revoceryCodeTimeout));
+        LocalDateTime timeout = userRecoveryCode.getCreationDate().plusMinutes(Long.parseLong(recoveryCodeTimeout));
         LocalDateTime now = LocalDateTime.now();
 
 
