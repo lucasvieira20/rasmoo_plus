@@ -16,4 +16,5 @@ public class LoginDto {
     @NotBlank(message = "Atributo obrigatório")
     private String password;
 
+
 }
