@@ -7,9 +7,12 @@ import com.client.ws.rasmooplus.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,9 +22,6 @@ public class UserController implements Serializable {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody UserDto dto) {
@@ -33,4 +33,13 @@ public class UserController implements Serializable {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
+    @PatchMapping(value="/{id}/upload-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> uploadPhoto(@PathVariable("id") Long id, @RequestPart("file") MultipartFile file) throws IOException {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.uploadPhoto(id, file));
+    }
+
+    @GetMapping(value="/{id}/photo", produces = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
+    public ResponseEntity<byte[]> downloadPhoto(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.downloadPhoto(id));
+    }
 }

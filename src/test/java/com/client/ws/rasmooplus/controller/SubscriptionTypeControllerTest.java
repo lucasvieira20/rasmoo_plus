@@ -107,7 +107,7 @@ public class SubscriptionTypeControllerTest {
 
         SubscriptionTypeDto subscriptionTypeDto = new SubscriptionTypeDto(
                 null,
-                "",
+                " ",
                 13L,
                 null,
                 "22"

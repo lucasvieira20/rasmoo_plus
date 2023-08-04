@@ -25,8 +25,8 @@ CREATE TABLE if not exists `users`(
     );
 
 CREATE TABLE if not exists `user_payment_info`(
-                                                  `user_payment_info_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                                  `card_number` CHAR(255) NOT NULL,
+  `user_payment_info_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `card_number` CHAR(255) NOT NULL,
     `card_expiration_month` INT NOT NULL,
     `card_expiration_year` INT NOT NULL,
     `card_security_code` CHAR(255) NOT NULL,
